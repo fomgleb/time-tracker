@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,11 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\HotKeysController.cs" />
+    <Compile Include="Controller\TimeInvestmentController.cs" />
+    <Compile Include="Model\HotKey.cs" />
+    <Compile Include="Model\TimeInvestment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controller\" />
-    <Folder Include="Model\" />
+    <ProjectReference Include="..\HooksLibrary\HooksLibrary.csproj">
+      <Project>{c11fc6c1-b793-4cf5-8d42-93ba1d0aa419}</Project>
+      <Name>HooksLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
