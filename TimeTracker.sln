@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.BusinessLogic", "TimeTracker.BusinessLogic\TimeTracker.BusinessLogic.csproj", "{EF40F7A6-4B61-4D70-94E7-0E5C35877D3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.WinForms", "TimeTracker.WinForms\TimeTracker.WinForms.csproj", "{EC9E64F3-019C-4F00-B25C-3F33AD5E0284}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HooksLibrary", "HooksLibrary\HooksLibrary.csproj", "{C11FC6C1-B793-4CF5-8D42-93BA1D0AA419}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{EF40F7A6-4B61-4D70-94E7-0E5C35877D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF40F7A6-4B61-4D70-94E7-0E5C35877D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF40F7A6-4B61-4D70-94E7-0E5C35877D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC9E64F3-019C-4F00-B25C-3F33AD5E0284}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC9E64F3-019C-4F00-B25C-3F33AD5E0284}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC9E64F3-019C-4F00-B25C-3F33AD5E0284}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC9E64F3-019C-4F00-B25C-3F33AD5E0284}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C11FC6C1-B793-4CF5-8D42-93BA1D0AA419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C11FC6C1-B793-4CF5-8D42-93BA1D0AA419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C11FC6C1-B793-4CF5-8D42-93BA1D0AA419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C11FC6C1-B793-4CF5-8D42-93BA1D0AA419}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
