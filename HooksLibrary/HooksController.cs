@@ -6,11 +6,12 @@ namespace HooksLibrary
 {
     public class HooksController
     {
-        public event Action PressedHookKeysListChanged;
-        public event Action PressedHookKeysListRemoving;
+        public event Action PressedKeysChanged;
+        public event Action PressedKeysAdded;
+        public event Action PressedKeysRemoving;
 
-        public List<Keys> PressedHookKeysList = new List<Keys>();
-        public List<string> PressedHookKeysStringList = new List<string>();
+        public List<Keys> PressedKeys = new List<Keys>();
+        public List<string> PressedKeysStringList = new List<string>();
 
         public void Initialize()
         {
@@ -28,18 +29,19 @@ namespace HooksLibrary
 
         private void OnKeyDown(LLKHEventArgs e)
         {
-            if (PressedHookKeysList.Contains(e.Keys)) return;
-            PressedHookKeysList.Add(e.Keys);
-            PressedHookKeysStringList.Add(e.Keys.ToString());
-            PressedHookKeysListChanged?.Invoke();
+            if (PressedKeys.Contains(e.Keys)) return;
+            PressedKeys.Add(e.Keys);
+            PressedKeysStringList.Add(e.Keys.ToString());
+            PressedKeysChanged?.Invoke();
+            PressedKeysAdded?.Invoke();
         }
 
         private void OnKeyUp(LLKHEventArgs e)
         {
-            PressedHookKeysListRemoving?.Invoke();
-            PressedHookKeysList.Remove(e.Keys);
-            PressedHookKeysStringList.Remove(e.Keys.ToString());
-            PressedHookKeysListChanged?.Invoke();
+            PressedKeysRemoving?.Invoke();
+            PressedKeys.Remove(e.Keys);
+            PressedKeysStringList.Remove(e.Keys.ToString());
+            PressedKeysChanged?.Invoke();
         }
     }
 }
