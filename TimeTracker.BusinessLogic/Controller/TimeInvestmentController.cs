@@ -12,26 +12,12 @@ namespace TimeTracker.BusinessLogic.Controller
     {
         private const string SAVE_FILE_NAME = "TimeInvestments.dat";
 
-        /// <summary>
-        /// All time investments (To get correct today`s invested time - use TodaysTimeInvestment)
-        /// </summary>
-        public List<TimeInvestment> TimeInvestments { get; }
+        public bool StopwatchIsRunning => _stopwatch.IsRunning;
 
         /// <summary>
-        /// Correct today's invested time.
+        /// All time investments. It always has today.
         /// </summary>
-        public TimeSpan TodaysInvestedTime
-        {
-            get
-            {
-                var todaysSavedTimeInvestment = TimeInvestments.SingleOrDefault(i => i.Date == DateTime.Today);
-                if (todaysSavedTimeInvestment == null)
-                    throw new NullReferenceException("Today's time investment can't be null.");
-
-                var elapsedStopwatchTime = _stopwatch.Elapsed;
-                return todaysSavedTimeInvestment.InvestedTime + elapsedStopwatchTime;
-            }
-        }
+        private List<TimeInvestment> TimeInvestments { get; set; }
 
         /// <summary>
         /// Time investment counter.
@@ -39,28 +25,46 @@ namespace TimeTracker.BusinessLogic.Controller
         private readonly Stopwatch _stopwatch = new Stopwatch();
 
         /// <summary>
-        /// Create new data or load exiting data.
+        /// Rewrite previous data and save this.
+        /// </summary>
+        public TimeInvestmentController(List<TimeInvestment> timeInvestments)
+        {
+            TimeInvestments = timeInvestments;
+            SaveTimeInvestments();
+        }
+
+        /// <summary>
+        /// Load exiting data or create new empty one.
         /// </summary>
         public TimeInvestmentController()
         {
-            TimeInvestments = LoadTimeInvestments();
-            if (TimeInvestments.SingleOrDefault(i => i.Date == DateTime.Today) == null)
-                TimeInvestments.Add(new TimeInvestment(DateTime.Today, TimeSpan.Zero));
+            if (!LoadTimeInvestments())
+                TimeInvestments = new List<TimeInvestment> {TimeInvestment.TodaysZero()};
         }
 
-        private List<TimeInvestment> LoadTimeInvestments()
+        /// <summary>
+        /// Load exiting data or create new empty one.
+        /// </summary>
+        /// <returns> Succeeded or failed. </returns>
+        private bool LoadTimeInvestments()
         {
             var formatter = new BinaryFormatter();
 
             using (var fileStream = new FileStream(SAVE_FILE_NAME, FileMode.OpenOrCreate))
             {
                 if (fileStream.Length > 0 && formatter.Deserialize(fileStream) is List<TimeInvestment> timeInvestments)
-                    return timeInvestments;
-                return new List<TimeInvestment>();
+                {
+                    TimeInvestments = timeInvestments;
+                    return true;
+                }
+                return false;
             }
         }
 
-        private void SaveTimeInvestments()
+        /// <summary>
+        /// Save data to file.
+        /// </summary>
+        public void SaveTimeInvestments()
         {
             var formatter = new BinaryFormatter();
 
@@ -85,39 +89,89 @@ namespace TimeTracker.BusinessLogic.Controller
         {
             var timeElapsed = _stopwatch.Elapsed;
 
-            var todayTimeInvestment = TimeInvestments.SingleOrDefault(i => i.Date == DateTime.Today);
-            if (todayTimeInvestment == null)
-            {
-                TimeInvestments.Add(new TimeInvestment(DateTime.Today, TimeSpan.Zero));
-                todayTimeInvestment = TimeInvestments[TimeInvestments.Count - 1];
-            }
-            todayTimeInvestment.InvestedTime += timeElapsed;
+            var todaysTimeInvestment = GetTimeInvestmentByDate(DateTime.Today);
+            var indexOfTodaysTimeInvestment = TimeInvestments.IndexOf(todaysTimeInvestment);
+
+            if (indexOfTodaysTimeInvestment == -1)
+                throw new Exception("The time investments must contain todays time investment.");
+
+            TimeInvestments[indexOfTodaysTimeInvestment] = TimeInvestments[indexOfTodaysTimeInvestment].AddInvestedTime(timeElapsed);
 
             SaveTimeInvestments();
 
             _stopwatch.Reset();
         }
 
-        public void AddDescription(string description, DateTime date)
+        /// <summary>
+        /// Set description in exiting time investment.
+        /// </summary>
+        /// <param name="description"> The description to set. </param>
+        /// <param name="date"> Date of the desired time investment. </param>
+        /// <exception cref="ArgumentNullException"> The description can't be null. </exception>
+        public void SetDescription(string description, DateTime date)
         {
             if (description == null)
-                throw new ArgumentNullException(nameof(description), "Argument can't be null");
+                throw new ArgumentNullException(nameof(description), "The description can't be null");
 
-            var timeInvestmentByDate = TimeInvestments.SingleOrDefault(t => t.Date == date);
-            if (timeInvestmentByDate != null) timeInvestmentByDate.Description = description;
+            var timeInvestment = TimeInvestments.SingleOrDefault(t => t.Date == date);
+            var timeInvestmentIndex = TimeInvestments.IndexOf(timeInvestment);
+            if (timeInvestmentIndex == -1)
+                TimeInvestments.Add(new TimeInvestment(date, TimeSpan.Zero, description));
+            else
+                TimeInvestments[timeInvestmentIndex] = TimeInvestments[timeInvestmentIndex].SetDescription(description);
         }
 
-        public TimeInvestment GetTimeInvestmentByDate(DateTime dateTime)
+        /// <summary>
+        /// Get the time investment by date.
+        /// </summary>
+        public TimeInvestment GetTimeInvestmentByDate(DateTime date)
         {
-            return TimeInvestments.SingleOrDefault(i => i.Date == dateTime);
+            return TimeInvestments.SingleOrDefault(t => t.Date == date);
         }
 
+        /// <summary>
+        /// Returns invested time for day.
+        /// </summary>
+        public TimeSpan GetInvestedTimeForDay(DateTime date)
+        {
+            return GetInvestedTimeByDateRange(date, date);
+        }
+
+        /// <summary>
+        /// Returns invested time for week using a date that is included in this week.
+        /// </summary>
+        public TimeSpan GetInvestedTimeForWeek(DateTime date)
+        {
+            var firstDateOfWeek = date.DayOfWeek == DayOfWeek.Sunday ? date.AddDays(-6) : date.AddDays(-((int)date.DayOfWeek - 1));
+            var lastDateOfWeek = firstDateOfWeek.AddDays(6);
+            return GetInvestedTimeByDateRange(firstDateOfWeek, lastDateOfWeek);
+        }
+
+        /// <summary>
+        /// Returns invested time for month using a date that is included in this month.
+        /// </summary>
+        public TimeSpan GetInvestedTimeForMonth(DateTime date)
+        {
+            var firstDateOfMonth = date.AddDays(-date.Day - 1);
+            var lastDateOfMonth = firstDateOfMonth.AddDays(DateTime.DaysInMonth(date.Year, date.Month) - 1);
+            return GetInvestedTimeByDateRange(firstDateOfMonth, lastDateOfMonth);
+        }
+
+        /// <summary>
+        /// Find how much time was invested in this time period.
+        /// </summary>
+        /// <param name="startDate"> Start of time period. </param>
+        /// <param name="endDate">End of time period. </param>
         public TimeSpan GetInvestedTimeByDateRange(DateTime startDate, DateTime endDate)
         {
-            TimeSpan investedTime = TimeSpan.Zero;
-            for (DateTime i = startDate; i <= endDate; i.AddDays(1))
+            var investedTime = TimeSpan.Zero;
+            for (var currentDate = startDate; currentDate <= endDate; currentDate = currentDate.AddDays(1))
             {
-                investedTime += GetTimeInvestmentByDate(i).InvestedTime;
+                var currentTimeInvestment = TimeInvestments.SingleOrDefault(t => t.Date == currentDate);
+                investedTime += currentTimeInvestment.InvestedTime;
+
+                if (currentDate == DateTime.Today)
+                    investedTime += _stopwatch.Elapsed;
             }
 
             return investedTime;
