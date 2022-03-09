@@ -3,64 +3,58 @@
 namespace TimeTracker.BusinessLogic.Model
 {
     [Serializable]
-    public struct TimeInvestment
+    public class TimeInvestment
     {
+        private DateTime _date;
+        private TimeSpan _investedTime;
+        private string _description;
+
         /// <summary>
         /// The date the time was invested.
         /// </summary>
-        public DateTime Date { get; }
+        public DateTime Date
+        {
+            get => _date;
+            private set
+            {
+                if (value > DateTime.Today)
+                    throw new ArgumentOutOfRangeException(nameof(value), "The date can't be greater than today.");
+                _date = value;
+            }
+        }
 
         /// <summary>
         /// How much time invested was.
         /// </summary>
-        public TimeSpan InvestedTime { get; }
+        public TimeSpan InvestedTime
+        {
+            get => _investedTime;
+            set
+            {
+                if (value.TotalSeconds < 0 || value.TotalHours > 24)
+                    throw new ArgumentOutOfRangeException(nameof(value), "The invested time can't be negative and greater than 24 hours.");
+                _investedTime = value;
+            }
+        }
 
         /// <summary>
         /// Where was the time invested.
         /// </summary>
-        public string Description { get; }
-
-        /// <summary>
-        /// Time investment with Date - today, Invested Time - zero, and empty description.
-        /// </summary>
-        public static TimeInvestment TodaysZero()
+        public string Description
         {
-            return new TimeInvestment(DateTime.Today, TimeSpan.Zero, "");
+            get => _description;
+            set => _description = value ?? throw new ArgumentNullException(nameof(value), "The description can't be null.");
         }
 
         /// <summary>
         /// Create new time investment.
         /// </summary>
-        public TimeInvestment(DateTime date, TimeSpan investedTime) : this(date, investedTime, "") { }
-
-        /// <summary>
-        /// Create new time investment.
-        /// </summary>
-        public TimeInvestment(DateTime date, TimeSpan investedTime, string description)
+        /// <param name="date"> Investment date. </param>
+        /// <param name="investedTime"> How much time to invest. </param>
+        public TimeInvestment(DateTime date, TimeSpan investedTime)
         {
-            if (investedTime.TotalSeconds < 0)
-                throw new ArgumentOutOfRangeException(nameof(investedTime), "The invested time can't be negative.");
-            if (description == null)
-                throw new ArgumentNullException(nameof(description), "The description can't be null.");
-
             Date = date;
             InvestedTime = investedTime;
-            Description = description;
-        }
-
-        public TimeInvestment AddInvestedTime(TimeSpan time)
-        {
-            if (InvestedTime.TotalHours + time.TotalHours < 0 || InvestedTime.TotalHours + time.TotalHours > 24)
-                throw new ArgumentOutOfRangeException(nameof(time),
-                    "The invested time filed can't be fewer than zero and greater than 24 hours");
-            return new TimeInvestment(Date, InvestedTime + time, Description);
-        }
-
-        public TimeInvestment SetDescription(string description)
-        {
-            if (description == null)
-                throw new ArgumentNullException(nameof(description), "The description can't be null.");
-            return new TimeInvestment(Date, InvestedTime, description);
         }
     }
 }
