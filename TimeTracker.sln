@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.WinForms", "Tim
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HooksLibrary", "HooksLibrary\HooksLibrary.csproj", "{C11FC6C1-B793-4CF5-8D42-93BA1D0AA419}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.BusinessLogicTests", "TimeTracker.BusinessLogicTests\TimeTracker.BusinessLogicTests.csproj", "{D97EBEFC-CAC3-4B3E-B111-8E48641508C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C11FC6C1-B793-4CF5-8D42-93BA1D0AA419}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C11FC6C1-B793-4CF5-8D42-93BA1D0AA419}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C11FC6C1-B793-4CF5-8D42-93BA1D0AA419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D97EBEFC-CAC3-4B3E-B111-8E48641508C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D97EBEFC-CAC3-4B3E-B111-8E48641508C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D97EBEFC-CAC3-4B3E-B111-8E48641508C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D97EBEFC-CAC3-4B3E-B111-8E48641508C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
