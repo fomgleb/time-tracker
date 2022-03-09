@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Controller\HotKeysController.cs" />
     <Compile Include="Controller\TimeInvestmentController.cs" />
+    <Compile Include="Extensions\TimeSpanExtension.cs" />
     <Compile Include="Model\HotKey.cs" />
     <Compile Include="Model\TimeInvestment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,5 +55,6 @@
       <Name>HooksLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
