@@ -1,39 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using TimeTracker.BusinessLogic.Controller;
 
 namespace TimeTracker.BusinessLogic.Model
 {
     [Serializable]
-    public class HotKey
+    public struct HotKey
     {
-        private List<Keys> _shortcut;
+        private Keys[] _shortcut;
 
-        public List<Keys> Shortcut
+        public Keys[] Shortcut
         {
-            get => _shortcut;
-            set => _shortcut = value ?? throw new ArgumentNullException(nameof(value), "The shortcut can't be null.");
+            get
+            {
+                Keys[] returningKeys = new Keys[_shortcut.Length];
+                for (var i = 0; i < returningKeys.Length; i++)
+                    returningKeys[i] = _shortcut[i];
+                return returningKeys;
+            }
         }
 
-        public HotKeyType HotKeyType { get; private set; }
+        public HotKeyType HotKeyType { get; }
 
-        public HotKey(List<Keys> shortcut, HotKeyType hotKeyType)
+        public HotKey(Keys[] shortcut, HotKeyType hotKeyType)
         {
-            Shortcut = shortcut;
+            if (shortcut == null)
+                throw new ArgumentNullException(nameof(shortcut), "The shortcut can't be null.");
+
+            _shortcut = shortcut;
             HotKeyType = hotKeyType;
+        }
+
+        public HotKey SetNewShortcut(Keys[] shortcut)
+        {
+            return new HotKey(shortcut, HotKeyType);
         }
 
         public override string ToString()
         {
             var shortcut = "";
-            for (var i = 0; i < Shortcut.Count; i++)
+            for (var i = 0; i < Shortcut.Length; i++)
             {
                 shortcut += Shortcut[i];
-                if (Shortcut.Count != i + 1)
+                if (Shortcut.Length != i + 1)
                     shortcut += @" + ";
             }
             return shortcut;
         }
+    }
+
+    public enum HotKeyType
+    {
+        ToggleStopwatch,
+        ToggleAppDisplay
     }
 }
