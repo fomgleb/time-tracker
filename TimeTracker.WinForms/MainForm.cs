@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using TimeTracker.BusinessLogic.Controller;
 using TimeTracker.BusinessLogic.Extensions;
+using TimeTracker.BusinessLogic.Model;
 using TimeTracker.WinForms.Properties;
 
 namespace TimeTracker.WinForms
@@ -13,7 +14,7 @@ namespace TimeTracker.WinForms
         private readonly HotKeysController _hotKeysController = new HotKeysController();
         private readonly TimeInvestmentController _timeInvestmentController = new TimeInvestmentController();
 
-        private readonly Dictionary<Button, HotKeyType> _changeHotKeysButtons = new Dictionary<Button, HotKeyType>();
+        private readonly Dictionary<Button, HotKeyType> _changeHotKeysButtons;
 
         private DateTime _selectedDate = DateTime.Today;
 
@@ -21,22 +22,23 @@ namespace TimeTracker.WinForms
         {   
             InitializeComponent();
 
-            _changeHotKeysButtons.Add(changeToggleAppDisplayHotKeyButton, HotKeyType.ToggleAppDisplay);
-            _changeHotKeysButtons.Add(changeToggleStopwatchHotKeyButton, HotKeyType.ToggleStopwatch);
+            _changeHotKeysButtons = new Dictionary<Button, HotKeyType>(HotKeysController.HotKeysCount)
+            {
+                {changeToggleAppDisplayHotKeyButton, HotKeyType.ToggleAppDisplay},
+                {changeToggleStopwatchHotKeyButton, HotKeyType.ToggleStopwatch}
+            };
 
             _hotKeysController.HotKeyChanged += OnHotKeyChanged;
             _hotKeysController.HotKeyPressed += OnHotKeyPressed;
 
             UpdateLabelsTexts();
-            UpdateButtonsTexts();
+            UpdateButtonText(_hotKeysController.HotKeys[0]);
+            UpdateButtonText(_hotKeysController.HotKeys[1]);
             UpdateTextBoxesTexts();
         }
 
         #region Events
-        private void OnHotKeyChanged(HotKeyType hotKeyType)
-        {
-            UpdateButtonsTexts();
-        }
+        
 
         private void OnHotKeyPressed(HotKeyType hotKeyType)
         {
@@ -99,6 +101,7 @@ namespace TimeTracker.WinForms
             ShowInTaskbar = true;
             Show();
             Activate();
+            Focus(); // TODO: Work or not?
         }
 
         private void HideApp()
@@ -146,6 +149,11 @@ namespace TimeTracker.WinForms
         #endregion
 
         #region Update texts
+        private void OnHotKeyChanged(HotKey hotKey)
+        {
+            UpdateButtonText(hotKey);
+        }
+
         private void UpdateLabelsTexts()
         {
             investedTimeForDayLabel.Text = _timeInvestmentController.GetInvestedTimeForDay(monthCalendar.SelectionStart).ToStringWithoutDays();
@@ -154,10 +162,10 @@ namespace TimeTracker.WinForms
             investedTimeInRangeLabel.Text = _timeInvestmentController.GetInvestedTimeByDateRange(monthCalendar.SelectionStart, monthCalendar.SelectionEnd).ToStringWithoutDays();
         }
 
-        private void UpdateButtonsTexts()
+        private void UpdateButtonText(HotKey hotKey)
         {
-            changeToggleStopwatchHotKeyButton.Text = _hotKeysController.GetHotKeyString(HotKeyType.ToggleStopwatch);
-            changeToggleAppDisplayHotKeyButton.Text = _hotKeysController.GetHotKeyString(HotKeyType.ToggleAppDisplay);
+            var changingButton = _changeHotKeysButtons.SingleOrDefault(b => b.Value == hotKey.HotKeyType).Key;
+            changingButton.Text = _hotKeysController.HotKeys.SingleOrDefault(h => h.HotKeyType == hotKey.HotKeyType).ToString();
         }
 
         private void UpdateTextBoxesTexts()
