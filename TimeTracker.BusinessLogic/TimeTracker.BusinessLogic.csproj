@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ControllerBase.cs" />
     <Compile Include="Controller\HotKeysController.cs" />
     <Compile Include="Controller\TimeInvestmentController.cs" />
     <Compile Include="Extensions\TimeSpanExtension.cs" />
