@@ -1,39 +1,36 @@
 ﻿using HooksLibrary;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using TimeTracker.BusinessLogic.Model;
 
 namespace TimeTracker.BusinessLogic.Controller
 {
-    public class HotKeysController
+    public class HotKeysController : ControllerBase
     {
-        private const int HOT_KEYS_COUNT = 2;
+        public const int HotKeysCount = 2;
         private const string SAVE_FILE_NAME = "HotKeys.dat";
 
-        private static readonly List<HotKey> DefaultHotKeys = new List<HotKey>
+        private static readonly HotKey[] DefaultHotKeys = new HotKey[HotKeysCount]
         {
-            new HotKey(new List<Keys> {Keys.LShiftKey, Keys.RShiftKey}, HotKeyType.ToggleStopwatch),
-            new HotKey(new List<Keys> {Keys.LControlKey, Keys.F7}, HotKeyType.ToggleAppDisplay)
+            new HotKey(new[] {Keys.LShiftKey, Keys.RShiftKey}, HotKeyType.ToggleStopwatch),
+            new HotKey(new[] {Keys.LControlKey, Keys.F7}, HotKeyType.ToggleAppDisplay)
         };
 
         public event Action<HotKeyType> HotKeyPressed;
-        public event Action<HotKeyType> HotKeyChanged;
+        public event Action<HotKey> HotKeyChanged;
 
-        private List<HotKey> _hotKeys;
+        private readonly HotKey[] _hotKeys;
 
-        private List<HotKey> HotKeys
+        public HotKey[] HotKeys
         {
-            get => _hotKeys;
-            set
+            get
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value), "Hot keys list can't be null.");
-
-                _hotKeys = value.Count == HOT_KEYS_COUNT ? value : DefaultHotKeys;
+                var returningHotKey = new HotKey[_hotKeys.Length];
+                for (int i = 0; i < returningHotKey.Length; i++)
+                    returningHotKey[i] = _hotKeys[i];
+                return returningHotKey;
             }
         }
 
@@ -44,97 +41,80 @@ namespace TimeTracker.BusinessLogic.Controller
         /// </summary>
         private int _changingHotKeyIndex = -1;
 
+        /// <summary>
+        /// Load hot keys and initialize hook keys controller (HOOK KEYS CONTROLLER MUST BE REMOVED AT THE END OF APPLICATION USING UninitializeHookKeys()).
+        /// </summary>
         public HotKeysController()
         {
-            LoadHotKeys();
-            
+            _hotKeys = Load<HotKey[]>(SAVE_FILE_NAME) ?? DefaultHotKeys;
+
             _hooksController.PressedKeysRemoving += OnPressedKeysRemoving;
             _hooksController.PressedKeysChanged += OnPressedKeysChanged;
-
             _hooksController.Initialize();
         }
 
+        /// <summary>
+        /// Must be called at the end of the application.  
+        /// </summary>
         public void UninitializeHookKeys()
         {
             _hooksController.Uninitialize();
         }
 
-        private void OnPressedKeysRemoving()
+        #region When hot key is pressed
+        private void OnPressedKeysChanged()
         {
-            if (_changingHotKeyIndex == -1) return;
-
-            HotKeys[_changingHotKeyIndex].Shortcut.Clear();
-            foreach (var pressedHookKey in _hooksController.PressedKeys)
-                HotKeys[_changingHotKeyIndex].Shortcut.Add(pressedHookKey);
-
-            HotKeyChanged?.Invoke(HotKeys[_changingHotKeyIndex].HotKeyType);
-            _changingHotKeyIndex = -1;
-            SaveHotKeys();
+            foreach (var hotKey in _hotKeys.Where(HotKeyIsPressed))
+                HotKeyPressed?.Invoke(hotKey.HotKeyType);
         }
 
-        private void OnPressedKeysChanged()
+        private bool HotKeyIsPressed(HotKey hotKey)
         {
             var pressedKeys = new Keys[_hooksController.PressedKeys.Count];
             _hooksController.PressedKeys.CopyTo(pressedKeys);
 
-            foreach (var hotKey in HotKeys)
-            {
-                if (hotKey.Shortcut.Count != pressedKeys.Length) continue;
+            if (hotKey.Shortcut.Length != pressedKeys.Length) return false;
 
-                var currentHotKeyIsPressed = true;
-                for (var i = 0; i < pressedKeys.Length; i++)
-                    if (hotKey.Shortcut[i] != pressedKeys[i])
-                    {
-                        currentHotKeyIsPressed = false;
-                        break;
-                    }
+            var hotKeyIsPressed = true;
+            for (var i = 0; i < pressedKeys.Length; i++)
+                if (hotKey.Shortcut[i] != pressedKeys[i])
+                {
+                    hotKeyIsPressed = false;
+                    break;
+                }
 
-                if (currentHotKeyIsPressed)
-                    HotKeyPressed?.Invoke(hotKey.HotKeyType);
-            }
+            return hotKeyIsPressed;
         }
+        #endregion
 
-        /// <summary>
-        /// Load hot keys or empty list.
-        /// </summary>
-        /// <returns> Loaded or default hot keys. </returns>
-        private void LoadHotKeys()
+        #region Change hot key
+        private void OnPressedKeysRemoving()
         {
-            var formatter = new BinaryFormatter();
-
-            using (var fileStream = new FileStream(SAVE_FILE_NAME, FileMode.OpenOrCreate))
-            {
-                if (fileStream.Length > 0 && formatter.Deserialize(fileStream) is List<HotKey> hotKeys)
-                    HotKeys = hotKeys;
-                else
-                    HotKeys = new List<HotKey>();
-            }
-        }
-
-        public void SaveHotKeys()
-        {
-            var formatter = new BinaryFormatter();
-
-            using (var fileStream = new FileStream(SAVE_FILE_NAME, FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fileStream, HotKeys);
-            }
+            StopChangingHotKey();
         }
 
         public void StartChangingHotKey(HotKeyType hotKeyType)
         {
-            _changingHotKeyIndex = HotKeys.FindIndex(h => h.HotKeyType == hotKeyType);
+            for (var i = 0; i < HotKeysCount; i++)
+                if (_hotKeys[i].HotKeyType == hotKeyType)
+                    _changingHotKeyIndex = i;
         }
 
-        public string GetHotKeyString(HotKeyType hotKeyType)
+        private void StopChangingHotKey()
         {
-            return HotKeys.SingleOrDefault(h => h.HotKeyType == hotKeyType)?.ToString();
-        }
-    }
+            if (_changingHotKeyIndex == -1) return;
 
-    public enum HotKeyType
-    {
-        ToggleStopwatch,
-        ToggleAppDisplay
+            var newShortcut = new Keys[_hooksController.PressedKeys.Count];
+            for (var i = 0; i < newShortcut.Length; i++)
+                newShortcut[i] = _hooksController.PressedKeys[i];
+
+            _hotKeys[_changingHotKeyIndex] = _hotKeys[_changingHotKeyIndex].SetNewShortcut(newShortcut);
+
+            HotKeyChanged?.Invoke(_hotKeys[_changingHotKeyIndex]);
+            _changingHotKeyIndex = -1;
+
+            Save(SAVE_FILE_NAME, _hotKeys);
+        }   
+        #endregion
     }
 }
