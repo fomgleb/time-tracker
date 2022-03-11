@@ -94,8 +94,7 @@ namespace TimeTracker.WinForms
         {
             if (_timeInvestmentController.StopwatchIsRunning)
                 updateLabelsTextsTimer.Start();
-            else
-                UpdateLabelsTexts();
+            UpdateLabelsTexts();
             WindowState = FormWindowState.Normal;
             ShowInTaskbar = true;
             Show();
