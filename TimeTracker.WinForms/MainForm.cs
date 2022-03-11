@@ -35,11 +35,10 @@ namespace TimeTracker.WinForms
             UpdateButtonText(_hotKeysController.HotKeys[0]);
             UpdateButtonText(_hotKeysController.HotKeys[1]);
             UpdateTextBoxesTexts();
+            UpdateCalendar();
         }
 
         #region Events
-        
-
         private void OnHotKeyPressed(HotKeyType hotKeyType)
         {
             switch (hotKeyType)
@@ -148,7 +147,7 @@ namespace TimeTracker.WinForms
         }
         #endregion
 
-        #region Update texts
+        #region Updates
         private void OnHotKeyChanged(HotKey hotKey)
         {
             UpdateButtonText(hotKey);
@@ -176,6 +175,12 @@ namespace TimeTracker.WinForms
         private void UpdateLabelsTextsTimer_Tick(object sender, EventArgs e)
         {
             UpdateLabelsTexts();
+        }
+
+        private void UpdateCalendar()
+        {
+            monthCalendar.MinDate = _timeInvestmentController.TimeInvestments[0].Date;
+            monthCalendar.MaxDate = DateTime.Today;
         }
 
         private void MonthCalendar_DateChanged(object sender, DateRangeEventArgs e)
