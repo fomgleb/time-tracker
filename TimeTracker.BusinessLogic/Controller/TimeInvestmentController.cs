@@ -8,16 +8,23 @@ using TimeTracker.BusinessLogic.Model;
 
 namespace TimeTracker.BusinessLogic.Controller
 {
-    public class TimeInvestmentController
+    public class TimeInvestmentController : ControllerBase
     {
         private const string SAVE_FILE_NAME = "TimeInvestments.dat";
 
+        private readonly List<TimeInvestment> _defaultTimeInvestments = new List<TimeInvestment>
+        {
+            TimeInvestment.TodaysZero()
+        };
+
         public bool StopwatchIsRunning => _stopwatch.IsRunning;
 
+        private readonly List<TimeInvestment> _timeInvestments;
+
         /// <summary>
-        /// All time investments. It always has today.
+        /// Returns all the time investments.
         /// </summary>
-        private List<TimeInvestment> TimeInvestments { get; set; }
+        public List<TimeInvestment> TimeInvestments => _timeInvestments.ToList();
 
         /// <summary>
         /// Time investment counter.
@@ -29,8 +36,8 @@ namespace TimeTracker.BusinessLogic.Controller
         /// </summary>
         public TimeInvestmentController(List<TimeInvestment> timeInvestments)
         {
-            TimeInvestments = timeInvestments;
-            SaveTimeInvestments();
+            _timeInvestments = timeInvestments;
+            Save(SAVE_FILE_NAME, _timeInvestments);
         }
 
         /// <summary>
@@ -38,40 +45,7 @@ namespace TimeTracker.BusinessLogic.Controller
         /// </summary>
         public TimeInvestmentController()
         {
-            if (!LoadTimeInvestments())
-                TimeInvestments = new List<TimeInvestment> {TimeInvestment.TodaysZero()};
-        }
-
-        /// <summary>
-        /// Load exiting data or create new empty one.
-        /// </summary>
-        /// <returns> Succeeded or failed. </returns>
-        private bool LoadTimeInvestments()
-        {
-            var formatter = new BinaryFormatter();
-
-            using (var fileStream = new FileStream(SAVE_FILE_NAME, FileMode.OpenOrCreate))
-            {
-                if (fileStream.Length > 0 && formatter.Deserialize(fileStream) is List<TimeInvestment> timeInvestments)
-                {
-                    TimeInvestments = timeInvestments;
-                    return true;
-                }
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Save data to file.
-        /// </summary>
-        public void SaveTimeInvestments()
-        {
-            var formatter = new BinaryFormatter();
-
-            using (var fileStream = new FileStream(SAVE_FILE_NAME, FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fileStream, TimeInvestments);
-            }
+            _timeInvestments = Load<List<TimeInvestment>>(SAVE_FILE_NAME) ?? _defaultTimeInvestments;
         }
 
         /// <summary>
@@ -90,14 +64,14 @@ namespace TimeTracker.BusinessLogic.Controller
             var timeElapsed = _stopwatch.Elapsed;
 
             var todaysTimeInvestment = GetTimeInvestmentByDate(DateTime.Today);
-            var indexOfTodaysTimeInvestment = TimeInvestments.IndexOf(todaysTimeInvestment);
+            var indexOfTodaysTimeInvestment = _timeInvestments.IndexOf(todaysTimeInvestment);
 
             if (indexOfTodaysTimeInvestment == -1)
                 throw new Exception("The time investments must contain todays time investment.");
 
-            TimeInvestments[indexOfTodaysTimeInvestment] = TimeInvestments[indexOfTodaysTimeInvestment].AddInvestedTime(timeElapsed);
+            _timeInvestments[indexOfTodaysTimeInvestment] = _timeInvestments[indexOfTodaysTimeInvestment].AddInvestedTime(timeElapsed);
 
-            SaveTimeInvestments();
+            Save(SAVE_FILE_NAME, _timeInvestments);
 
             _stopwatch.Reset();
         }
@@ -113,12 +87,12 @@ namespace TimeTracker.BusinessLogic.Controller
             if (description == null)
                 throw new ArgumentNullException(nameof(description), "The description can't be null");
 
-            var timeInvestment = TimeInvestments.SingleOrDefault(t => t.Date == date);
-            var timeInvestmentIndex = TimeInvestments.IndexOf(timeInvestment);
+            var timeInvestment = _timeInvestments.SingleOrDefault(t => t.Date == date);
+            var timeInvestmentIndex = _timeInvestments.IndexOf(timeInvestment);
             if (timeInvestmentIndex == -1)
-                TimeInvestments.Add(new TimeInvestment(date, TimeSpan.Zero, description));
+                _timeInvestments.Add(new TimeInvestment(date, TimeSpan.Zero, description));
             else
-                TimeInvestments[timeInvestmentIndex] = TimeInvestments[timeInvestmentIndex].SetDescription(description);
+                _timeInvestments[timeInvestmentIndex] = _timeInvestments[timeInvestmentIndex].SetDescription(description);
         }
 
         /// <summary>
@@ -126,7 +100,7 @@ namespace TimeTracker.BusinessLogic.Controller
         /// </summary>
         public TimeInvestment GetTimeInvestmentByDate(DateTime date)
         {
-            return TimeInvestments.SingleOrDefault(t => t.Date == date);
+            return _timeInvestments.SingleOrDefault(t => t.Date == date);
         }
 
         /// <summary>
@@ -167,7 +141,7 @@ namespace TimeTracker.BusinessLogic.Controller
             var investedTime = TimeSpan.Zero;
             for (var currentDate = startDate; currentDate <= endDate; currentDate = currentDate.AddDays(1))
             {
-                var currentTimeInvestment = TimeInvestments.SingleOrDefault(t => t.Date == currentDate);
+                var currentTimeInvestment = _timeInvestments.SingleOrDefault(t => t.Date == currentDate);
                 investedTime += currentTimeInvestment.InvestedTime;
 
                 if (currentDate == DateTime.Today)
