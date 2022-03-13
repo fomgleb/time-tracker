@@ -69,6 +69,7 @@ namespace TimeTracker.WinForms
         private void StopSpendingTime()
         {
             _timeInvestmentController.StopSpendingTime();
+            _timeInvestmentController.Save();
             notifyIcon.Icon = Resources.play;
             startSpendingTimePictureBox.Image = Resources.play1;
             switchToolStripMenuItem.Text = @"Start";
@@ -97,9 +98,10 @@ namespace TimeTracker.WinForms
             UpdateLabelsTexts();
             WindowState = FormWindowState.Normal;
             ShowInTaskbar = true;
+            UpdateCalendar();
             Show();
             Activate();
-            Focus(); // TODO: Work or not?
+            Focus();
         }
 
         private void HideApp()
@@ -194,8 +196,9 @@ namespace TimeTracker.WinForms
         #region Form closing
         private void ClosePreparations()
         {
-            _hotKeysController.UninitializeHookKeys();
-            StopSpendingTime();
+            if (_timeInvestmentController.StopwatchIsRunning)
+                StopSpendingTime();
+            _timeInvestmentController.Save();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using HooksLibrary;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using TimeTracker.BusinessLogic.Model;
@@ -22,16 +23,7 @@ namespace TimeTracker.BusinessLogic.Controller
 
         private readonly HotKey[] _hotKeys;
 
-        public HotKey[] HotKeys
-        {
-            get
-            {
-                var returningHotKey = new HotKey[_hotKeys.Length];
-                for (int i = 0; i < returningHotKey.Length; i++)
-                    returningHotKey[i] = _hotKeys[i];
-                return returningHotKey;
-            }
-        }
+        public HotKey[] HotKeys => _hotKeys.ToArray();
 
         private readonly HooksController _hooksController = new HooksController();
 
@@ -49,15 +41,6 @@ namespace TimeTracker.BusinessLogic.Controller
 
             _hooksController.PressedKeysRemoving += OnPressedKeysRemoving;
             _hooksController.PressedKeysChanged += OnPressedKeysChanged;
-            _hooksController.Initialize();
-        }
-
-        /// <summary>
-        /// Must be called at the end of the application.  
-        /// </summary>
-        public void UninitializeHookKeys()
-        {
-            _hooksController.Uninitialize();
         }
 
         #region When hot key is pressed
@@ -69,11 +52,10 @@ namespace TimeTracker.BusinessLogic.Controller
 
         private bool HotKeyIsPressed(HotKey hotKey)
         {
-            var pressedKeys = new Keys[_hooksController.PressedKeys.Count];
-            _hooksController.PressedKeys.CopyTo(pressedKeys);
+            var pressedKeys = _hooksController.PressedKeys;
 
             if (hotKey.Shortcut.Length != pressedKeys.Length) return false;
-
+            
             var hotKeyIsPressed = true;
             for (var i = 0; i < pressedKeys.Length; i++)
                 if (hotKey.Shortcut[i] != pressedKeys[i])
@@ -103,7 +85,7 @@ namespace TimeTracker.BusinessLogic.Controller
         {
             if (_changingHotKeyIndex == -1) return;
 
-            var newShortcut = new Keys[_hooksController.PressedKeys.Count];
+            var newShortcut = new Keys[_hooksController.PressedKeys.Length];
             for (var i = 0; i < newShortcut.Length; i++)
                 newShortcut[i] = _hooksController.PressedKeys[i];
 

@@ -12,11 +12,6 @@ namespace TimeTracker.BusinessLogic.Controller
     {
         private const string SAVE_FILE_NAME = "TimeInvestments.dat";
 
-        private readonly List<TimeInvestment> _defaultTimeInvestments = new List<TimeInvestment>
-        {
-            TimeInvestment.TodaysZero()
-        };
-
         public bool StopwatchIsRunning => _stopwatch.IsRunning;
 
         private readonly List<TimeInvestment> _timeInvestments;
@@ -32,12 +27,11 @@ namespace TimeTracker.BusinessLogic.Controller
         private readonly Stopwatch _stopwatch = new Stopwatch();
 
         /// <summary>
-        /// Rewrite previous data and save this.
+        /// Create new timeInvestments.
         /// </summary>
         public TimeInvestmentController(List<TimeInvestment> timeInvestments)
         {
             _timeInvestments = timeInvestments;
-            Save(SAVE_FILE_NAME, _timeInvestments);
         }
 
         /// <summary>
@@ -45,7 +39,15 @@ namespace TimeTracker.BusinessLogic.Controller
         /// </summary>
         public TimeInvestmentController()
         {
-            _timeInvestments = Load<List<TimeInvestment>>(SAVE_FILE_NAME) ?? _defaultTimeInvestments;
+            _timeInvestments = Load<List<TimeInvestment>>(SAVE_FILE_NAME) ?? new List<TimeInvestment>();
+        }
+
+        /// <summary>
+        /// Save time investments to file.
+        /// </summary>
+        public void Save()
+        {
+            Save(SAVE_FILE_NAME, _timeInvestments);
         }
 
         /// <summary>
@@ -57,7 +59,7 @@ namespace TimeTracker.BusinessLogic.Controller
         }
 
         /// <summary>
-        /// Stop stopwatch and save data to file.
+        /// Stop stopwatch and insert data to time investments.
         /// </summary>
         public void StopSpendingTime()
         {
@@ -67,11 +69,12 @@ namespace TimeTracker.BusinessLogic.Controller
             var indexOfTodaysTimeInvestment = _timeInvestments.IndexOf(todaysTimeInvestment);
 
             if (indexOfTodaysTimeInvestment == -1)
-                throw new Exception("The time investments must contain todays time investment.");
+            {
+                _timeInvestments.Add(new TimeInvestment(DateTime.Today, TimeSpan.Zero));
+                indexOfTodaysTimeInvestment = _timeInvestments.Count - 1;
+            }
 
             _timeInvestments[indexOfTodaysTimeInvestment] = _timeInvestments[indexOfTodaysTimeInvestment].AddInvestedTime(timeElapsed);
-
-            Save(SAVE_FILE_NAME, _timeInvestments);
 
             _stopwatch.Reset();
         }
