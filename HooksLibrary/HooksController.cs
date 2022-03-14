@@ -81,6 +81,7 @@ namespace HooksLibrary
         private void OnKeyUp(LLKHEventArgs e)
         {
             if (_pressedKeys.Count == 0 && _pressTimes.Count == 0) return;
+            if (!_pressedKeys.Contains(e.Keys)) return;
 
             PressedKeysRemoving?.Invoke();
             _pressTimes.RemoveAt(_pressedKeys.IndexOf(e.Keys));
