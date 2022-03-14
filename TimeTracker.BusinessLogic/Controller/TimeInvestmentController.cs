@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using TimeTracker.BusinessLogic.Model;
 
 namespace TimeTracker.BusinessLogic.Controller
@@ -138,7 +136,7 @@ namespace TimeTracker.BusinessLogic.Controller
         /// Find how much time was invested in this time period.
         /// </summary>
         /// <param name="startDate"> Start of time period. </param>
-        /// <param name="endDate">End of time period. </param>
+        /// <param name="endDate"> End of time period. </param>
         public TimeSpan GetInvestedTimeByDateRange(DateTime startDate, DateTime endDate)
         {
             var investedTime = TimeSpan.Zero;
