@@ -127,7 +127,7 @@ namespace TimeTracker.BusinessLogic.Controller
         /// </summary>
         public TimeSpan GetInvestedTimeForMonth(DateTime date)
         {
-            var firstDateOfMonth = date.AddDays(-date.Day - 1);
+            var firstDateOfMonth = date.AddDays(-date.Day + 1);
             var lastDateOfMonth = firstDateOfMonth.AddDays(DateTime.DaysInMonth(date.Year, date.Month) - 1);
             return GetInvestedTimeByDateRange(firstDateOfMonth, lastDateOfMonth);
         }
