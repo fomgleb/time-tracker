@@ -93,12 +93,14 @@ namespace TimeTracker.WinForms
         #region Show or hide application
         private void ShowApp()
         {
+
             if (_timeInvestmentController.StopwatchIsRunning)
                 updateLabelsTextsTimer.Start();
             UpdateLabelsTexts();
             WindowState = FormWindowState.Normal;
             ShowInTaskbar = true;
             UpdateCalendar();
+            monthCalendar.SelectionStart = DateTime.Today;
             Show();
             Activate();
             Focus();
