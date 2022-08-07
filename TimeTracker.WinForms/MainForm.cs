@@ -182,8 +182,10 @@ namespace TimeTracker.WinForms
 
         private void UpdateCalendar()
         {
-            monthCalendar.MinDate = _timeInvestmentController.TimeInvestments[0].Date;
             monthCalendar.MaxDate = DateTime.Today;
+            monthCalendar.MinDate = _timeInvestmentController.TimeInvestments.Count > 0
+                ? _timeInvestmentController.TimeInvestments[0].Date
+                : DateTime.Today.AddDays(-1);
         }
 
         private void MonthCalendar_DateChanged(object sender, DateRangeEventArgs e)
