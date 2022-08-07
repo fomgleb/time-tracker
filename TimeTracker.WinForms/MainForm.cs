@@ -36,6 +36,7 @@ namespace TimeTracker.WinForms
             UpdateButtonText(_hotKeysController.HotKeys[1]);
             UpdateTextBoxesTexts();
             UpdateCalendar();
+            monthCalendar.SelectionStart = DateTime.Today;
         }
 
         #region Events
