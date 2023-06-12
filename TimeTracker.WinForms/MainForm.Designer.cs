@@ -101,19 +101,19 @@ namespace TimeTracker.WinForms
             this.closeToolStripMenuItem,
             this.switchToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(104, 48);
+            this.contextMenuStrip.Size = new System.Drawing.Size(115, 52);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(114, 24);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.CloseToolStripMenuItem_Click);
             // 
             // switchToolStripMenuItem
             // 
             this.switchToolStripMenuItem.Name = "switchToolStripMenuItem";
-            this.switchToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.switchToolStripMenuItem.Size = new System.Drawing.Size(114, 24);
             this.switchToolStripMenuItem.Text = "Play";
             this.switchToolStripMenuItem.Click += new System.EventHandler(this.SwitchToolStripMenuItem_Click);
             // 
@@ -135,17 +135,17 @@ namespace TimeTracker.WinForms
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 3;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(391, 331);
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(682, 403);
             this.tableLayoutPanel4.TabIndex = 6;
             // 
             // tableLayoutPanel9
             // 
             this.tableLayoutPanel9.ColumnCount = 2;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel9.Controls.Add(this.pictureBox5, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.changeToggleAppDisplayHotKeyButton, 1, 0);
@@ -155,7 +155,7 @@ namespace TimeTracker.WinForms
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 1;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(389, 45);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(680, 55);
             this.tableLayoutPanel9.TabIndex = 6;
             // 
             // pictureBox5
@@ -165,7 +165,7 @@ namespace TimeTracker.WinForms
             this.pictureBox5.Location = new System.Drawing.Point(0, 0);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(49, 45);
+            this.pictureBox5.Size = new System.Drawing.Size(65, 55);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox5.TabIndex = 3;
             this.pictureBox5.TabStop = false;
@@ -180,10 +180,10 @@ namespace TimeTracker.WinForms
             this.changeToggleAppDisplayHotKeyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.changeToggleAppDisplayHotKeyButton.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.changeToggleAppDisplayHotKeyButton.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.changeToggleAppDisplayHotKeyButton.Location = new System.Drawing.Point(57, 4);
-            this.changeToggleAppDisplayHotKeyButton.Margin = new System.Windows.Forms.Padding(8, 4, 8, 4);
+            this.changeToggleAppDisplayHotKeyButton.Location = new System.Drawing.Point(76, 5);
+            this.changeToggleAppDisplayHotKeyButton.Margin = new System.Windows.Forms.Padding(11, 5, 11, 5);
             this.changeToggleAppDisplayHotKeyButton.Name = "changeToggleAppDisplayHotKeyButton";
-            this.changeToggleAppDisplayHotKeyButton.Size = new System.Drawing.Size(324, 37);
+            this.changeToggleAppDisplayHotKeyButton.Size = new System.Drawing.Size(593, 45);
             this.changeToggleAppDisplayHotKeyButton.TabIndex = 2;
             this.changeToggleAppDisplayHotKeyButton.Text = "Downloading...";
             this.changeToggleAppDisplayHotKeyButton.UseVisualStyleBackColor = true;
@@ -192,17 +192,17 @@ namespace TimeTracker.WinForms
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel5, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel10, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(1, 93);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(1, 113);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(389, 237);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(680, 289);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
             // tableLayoutPanel5
@@ -212,13 +212,13 @@ namespace TimeTracker.WinForms
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.descriptionTextBox, 0, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(200, 0);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(350, 0);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.87097F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.12903F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(189, 237);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(330, 289);
             this.tableLayoutPanel5.TabIndex = 4;
             // 
             // tableLayoutPanel1
@@ -237,23 +237,23 @@ namespace TimeTracker.WinForms
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(189, 139);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(330, 170);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 2;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.Controls.Add(this.investedTimeInMonthLabel, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.pictureBox3, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(1, 93);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(1, 113);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(187, 45);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(328, 56);
             this.tableLayoutPanel7.TabIndex = 6;
             // 
             // investedTimeInMonthLabel
@@ -263,10 +263,9 @@ namespace TimeTracker.WinForms
             this.investedTimeInMonthLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.investedTimeInMonthLabel.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.investedTimeInMonthLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.investedTimeInMonthLabel.Location = new System.Drawing.Point(45, 0);
-            this.investedTimeInMonthLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.investedTimeInMonthLabel.Location = new System.Drawing.Point(150, 0);
             this.investedTimeInMonthLabel.Name = "investedTimeInMonthLabel";
-            this.investedTimeInMonthLabel.Size = new System.Drawing.Size(140, 45);
+            this.investedTimeInMonthLabel.Size = new System.Drawing.Size(175, 56);
             this.investedTimeInMonthLabel.TabIndex = 2;
             this.investedTimeInMonthLabel.Text = "000:00:00";
             this.investedTimeInMonthLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -278,7 +277,7 @@ namespace TimeTracker.WinForms
             this.pictureBox3.Location = new System.Drawing.Point(0, 0);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(40, 45);
+            this.pictureBox3.Size = new System.Drawing.Size(53, 56);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 1;
             this.pictureBox3.TabStop = false;
@@ -286,7 +285,7 @@ namespace TimeTracker.WinForms
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.investedTimeForDayLabel, 1, 0);
@@ -296,7 +295,7 @@ namespace TimeTracker.WinForms
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(187, 45);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(328, 55);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // pictureBox1
@@ -306,7 +305,7 @@ namespace TimeTracker.WinForms
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 45);
+            this.pictureBox1.Size = new System.Drawing.Size(53, 55);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -318,10 +317,9 @@ namespace TimeTracker.WinForms
             this.investedTimeForDayLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.investedTimeForDayLabel.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.investedTimeForDayLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.investedTimeForDayLabel.Location = new System.Drawing.Point(60, 0);
-            this.investedTimeForDayLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.investedTimeForDayLabel.Location = new System.Drawing.Point(219, 0);
             this.investedTimeForDayLabel.Name = "investedTimeForDayLabel";
-            this.investedTimeForDayLabel.Size = new System.Drawing.Size(125, 45);
+            this.investedTimeForDayLabel.Size = new System.Drawing.Size(156, 55);
             this.investedTimeForDayLabel.TabIndex = 0;
             this.investedTimeForDayLabel.Text = "00:00:00";
             this.investedTimeForDayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -329,17 +327,17 @@ namespace TimeTracker.WinForms
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.ColumnCount = 2;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.Controls.Add(this.investedTimeForWeekLabel, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.pictureBox2, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(1, 47);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(1, 57);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(187, 45);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(328, 55);
             this.tableLayoutPanel6.TabIndex = 5;
             // 
             // investedTimeForWeekLabel
@@ -349,10 +347,9 @@ namespace TimeTracker.WinForms
             this.investedTimeForWeekLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.investedTimeForWeekLabel.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.investedTimeForWeekLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.investedTimeForWeekLabel.Location = new System.Drawing.Point(60, 0);
-            this.investedTimeForWeekLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.investedTimeForWeekLabel.Location = new System.Drawing.Point(169, 0);
             this.investedTimeForWeekLabel.Name = "investedTimeForWeekLabel";
-            this.investedTimeForWeekLabel.Size = new System.Drawing.Size(125, 45);
+            this.investedTimeForWeekLabel.Size = new System.Drawing.Size(156, 55);
             this.investedTimeForWeekLabel.TabIndex = 2;
             this.investedTimeForWeekLabel.Text = "00:00:00";
             this.investedTimeForWeekLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -364,7 +361,7 @@ namespace TimeTracker.WinForms
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 45);
+            this.pictureBox2.Size = new System.Drawing.Size(53, 55);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
@@ -375,10 +372,10 @@ namespace TimeTracker.WinForms
             this.descriptionTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.descriptionTextBox.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.descriptionTextBox.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.descriptionTextBox.Location = new System.Drawing.Point(0, 139);
+            this.descriptionTextBox.Location = new System.Drawing.Point(0, 170);
             this.descriptionTextBox.Margin = new System.Windows.Forms.Padding(0);
             this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(189, 98);
+            this.descriptionTextBox.Size = new System.Drawing.Size(330, 119);
             this.descriptionTextBox.TabIndex = 4;
             this.descriptionTextBox.Text = "Downloading...";
             // 
@@ -396,7 +393,7 @@ namespace TimeTracker.WinForms
             this.tableLayoutPanel10.RowCount = 2;
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(200, 237);
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(350, 289);
             this.tableLayoutPanel10.TabIndex = 5;
             // 
             // monthCalendar
@@ -404,8 +401,7 @@ namespace TimeTracker.WinForms
             this.monthCalendar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.monthCalendar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.monthCalendar.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.monthCalendar.Location = new System.Drawing.Point(19, 8);
-            this.monthCalendar.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.monthCalendar.Location = new System.Drawing.Point(44, 10);
             this.monthCalendar.MaxDate = new System.DateTime(2022, 6, 24, 0, 0, 0, 0);
             this.monthCalendar.MaxSelectionCount = 9999;
             this.monthCalendar.MinDate = new System.DateTime(2021, 11, 3, 0, 0, 0, 0);
@@ -416,17 +412,17 @@ namespace TimeTracker.WinForms
             // tableLayoutPanel11
             // 
             this.tableLayoutPanel11.ColumnCount = 2;
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 245F));
             this.tableLayoutPanel11.Controls.Add(this.investedTimeInRangeLabel, 0, 0);
             this.tableLayoutPanel11.Controls.Add(this.pictureBox6, 0, 0);
             this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel11.Location = new System.Drawing.Point(1, 178);
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(1, 227);
             this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
             this.tableLayoutPanel11.RowCount = 1;
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(200, 58);
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(348, 61);
             this.tableLayoutPanel11.TabIndex = 7;
             // 
             // investedTimeInRangeLabel
@@ -436,10 +432,9 @@ namespace TimeTracker.WinForms
             this.investedTimeInRangeLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.investedTimeInRangeLabel.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.investedTimeInRangeLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.investedTimeInRangeLabel.Location = new System.Drawing.Point(58, 0);
-            this.investedTimeInRangeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.investedTimeInRangeLabel.Location = new System.Drawing.Point(170, 0);
             this.investedTimeInRangeLabel.Name = "investedTimeInRangeLabel";
-            this.investedTimeInRangeLabel.Size = new System.Drawing.Size(140, 58);
+            this.investedTimeInRangeLabel.Size = new System.Drawing.Size(175, 61);
             this.investedTimeInRangeLabel.TabIndex = 3;
             this.investedTimeInRangeLabel.Text = "000:00:00";
             this.investedTimeInRangeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -451,7 +446,7 @@ namespace TimeTracker.WinForms
             this.pictureBox6.Location = new System.Drawing.Point(0, 0);
             this.pictureBox6.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(40, 58);
+            this.pictureBox6.Size = new System.Drawing.Size(53, 61);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox6.TabIndex = 2;
             this.pictureBox6.TabStop = false;
@@ -459,17 +454,17 @@ namespace TimeTracker.WinForms
             // tableLayoutPanel8
             // 
             this.tableLayoutPanel8.ColumnCount = 2;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel8.Controls.Add(this.startSpendingTimePictureBox, 0, 0);
             this.tableLayoutPanel8.Controls.Add(this.changeToggleStopwatchHotKeyButton, 1, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(1, 47);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(1, 57);
             this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(389, 45);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(680, 55);
             this.tableLayoutPanel8.TabIndex = 5;
             // 
             // startSpendingTimePictureBox
@@ -479,7 +474,7 @@ namespace TimeTracker.WinForms
             this.startSpendingTimePictureBox.Location = new System.Drawing.Point(0, 0);
             this.startSpendingTimePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.startSpendingTimePictureBox.Name = "startSpendingTimePictureBox";
-            this.startSpendingTimePictureBox.Size = new System.Drawing.Size(40, 45);
+            this.startSpendingTimePictureBox.Size = new System.Drawing.Size(53, 55);
             this.startSpendingTimePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.startSpendingTimePictureBox.TabIndex = 3;
             this.startSpendingTimePictureBox.TabStop = false;
@@ -494,10 +489,10 @@ namespace TimeTracker.WinForms
             this.changeToggleStopwatchHotKeyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.changeToggleStopwatchHotKeyButton.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.changeToggleStopwatchHotKeyButton.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.changeToggleStopwatchHotKeyButton.Location = new System.Drawing.Point(48, 4);
-            this.changeToggleStopwatchHotKeyButton.Margin = new System.Windows.Forms.Padding(8, 4, 8, 4);
+            this.changeToggleStopwatchHotKeyButton.Location = new System.Drawing.Point(64, 5);
+            this.changeToggleStopwatchHotKeyButton.Margin = new System.Windows.Forms.Padding(11, 5, 11, 5);
             this.changeToggleStopwatchHotKeyButton.Name = "changeToggleStopwatchHotKeyButton";
-            this.changeToggleStopwatchHotKeyButton.Size = new System.Drawing.Size(333, 37);
+            this.changeToggleStopwatchHotKeyButton.Size = new System.Drawing.Size(605, 45);
             this.changeToggleStopwatchHotKeyButton.TabIndex = 2;
             this.changeToggleStopwatchHotKeyButton.Text = "Downloading...";
             this.changeToggleStopwatchHotKeyButton.UseVisualStyleBackColor = true;
@@ -505,16 +500,16 @@ namespace TimeTracker.WinForms
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(391, 331);
+            this.ClientSize = new System.Drawing.Size(682, 403);
             this.Controls.Add(this.tableLayoutPanel4);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(407, 370);
-            this.MinimumSize = new System.Drawing.Size(407, 370);
+            this.MaximumSize = new System.Drawing.Size(700, 450);
+            this.MinimumSize = new System.Drawing.Size(700, 450);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Time Tracker";
