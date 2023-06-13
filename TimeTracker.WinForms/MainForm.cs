@@ -34,8 +34,8 @@ namespace TimeTracker.WinForms
             UpdateLabelsTexts();
             UpdateButtonText(_hotKeysController.HotKeys[0]);
             UpdateButtonText(_hotKeysController.HotKeys[1]);
-            UpdateTextBoxesTexts();
             UpdateCalendar();
+            UpdateTextBoxesTexts();
             monthCalendar.SelectionStart = DateTime.Today;
         }
 
@@ -201,6 +201,7 @@ namespace TimeTracker.WinForms
         #region Form closing
         private void ClosePreparations()
         {
+            _timeInvestmentController.SetDescription(descriptionTextBox.Text, _selectedDate);
             if (_timeInvestmentController.StopwatchIsRunning)
                 StopSpendingTime();
             _timeInvestmentController.Save();
